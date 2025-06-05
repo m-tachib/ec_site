@@ -1,0 +1,10 @@
+<h1>書籍詳細</h1>
+    <div>
+        <p>書籍名: <%= @book.book_name %></p>
+        <p>著者名: <%= @book.author_name %></p>
+        <p>発行日: <%= @book.issue_date %></p>
+        <p>価格: <%= @book.price %></p>
+        <p>ステータス: <%= @book.status %></p>
+    </div>
+
+    <%= link_to "編集", edit_book_path(@book) %>

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book_name: MyString
+  author_name: MyString
+  issue_date: 2025-06-05
+  product_display: MyString
+  price: 1
+  status: 1
+  create_at: 2025-06-05 15:16:43
+  update_at: 2025-06-05 15:16:43
+
+two:
+  book_name: MyString
+  author_name: MyString
+  issue_date: 2025-06-05
+  product_display: MyString
+  price: 1
+  status: 1
+  create_at: 2025-06-05 15:16:43
+  update_at: 2025-06-05 15:16:43

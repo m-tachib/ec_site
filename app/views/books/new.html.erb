@@ -1,0 +1,30 @@
+<h1>書籍新規登録</h1>
+
+<%= form_with model: @book do |f| %>
+    <div>
+        <%= f.label :book_name, "書籍名" %>
+        <%= f.text_field :book_name %>
+    </div>
+    <div>
+        <%= f.label :author_name, "著者名" %>
+        <%= f.text_field :author_name %>
+    </div>
+    <div>
+        <%= f.label :issue_date, "発行日" %>
+        <%= f.date_field :issue_date %>
+    </div>
+    <div>
+        <%= f.label :price, "価格" %>
+        <%= f.number_field :price %>
+    </div>
+    <div>
+        <%= f.label :status, "ステータス" %>
+        <% Book.statuses.each do |status| %>
+            <%= f.select :status, I18n.t("enums.book.status#{status}") %>
+        <% end %>
+    </div>
+    
+    <div>
+        <%= f.submit "登録" %>
+    </div>
+<% end %>

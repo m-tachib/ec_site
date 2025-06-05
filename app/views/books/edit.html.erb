@@ -1,0 +1,26 @@
+<h1>書籍編集</h1>
+
+<%= form_with(model: @book, local: true) do |f| %>
+    <div>
+        <%= f.label :book_name, "書籍名" %>
+        <%= f.text_field :book_name %>
+    </div>
+
+    <div>
+        <%= f.label :author_name, "著者名" %>
+        <%= f.text_field :author_name %>
+    </div>
+
+    <div>
+        <%= f.label :issue_date, "発行日" %>
+        <%= f.date_field :issue_date %>
+    </div>
+
+    <div>
+        <%= f.label :price, "価格" %>
+        <%= f.number_field :price %>
+    </div>
+
+    <div>
+        <%= f.label :status, "ステータス" %>
+        <%= f.
