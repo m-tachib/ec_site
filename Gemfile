@@ -65,3 +65,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Devise
+gem "devise"
+
+
+
+gem "dotenv-rails", "~> 3.1"

@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+  before_action :check_admin, except: [:index, :show]
+
+
   def new
     @book = Book.new
   end
@@ -17,7 +20,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @books = Book.find(params[:id])
+    @book = Book.find(params[:id])
   end
 
   def update
@@ -34,11 +37,22 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    redirect_to books_path
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :status )
+    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price)
   end
+
+  def check_admin
+    unless admin_signed_in?
+      redirect_to root_path, alert: '管理者権限が必要です'
+    end
+  end
+
+  
 end

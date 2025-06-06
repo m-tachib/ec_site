@@ -1,5 +1,8 @@
 <h1>書籍一覧</h1>
-<%= link_to "新規登録", books_new_path %>
+
+<% if admin_signed_in? %>
+    <%= link_to "新規登録", books_new_path %>
+<% end %>
 
 <% @books.each do |book| %>
     <div>
@@ -7,7 +10,6 @@
         <p>著者名: <%= book.author_name %></p>
         <p>発行日: <%= book.issue_date %></p>
         <p>価格: <%= book.price %></p>
-        <p>商品ステータス: <%= book.status %></p>
         <%= link_to "詳細", book_path(book.id) %>
     </div>
 

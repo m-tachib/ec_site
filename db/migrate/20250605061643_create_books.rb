@@ -4,9 +4,8 @@ class CreateBooks < ActiveRecord::Migration[7.1]
       t.string :book_name, null: false
       t.string :author_name, null: false
       t.date :issue_date
-      t.string :product_display
+      t.boolean :product_display
       t.integer :price, null: false
-      t.integer :status, null: false
       
       t.timestamps
     end

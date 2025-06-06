@@ -4,7 +4,15 @@
         <p>著者名: <%= @book.author_name %></p>
         <p>発行日: <%= @book.issue_date %></p>
         <p>価格: <%= @book.price %></p>
-        <p>ステータス: <%= @book.status %></p>
     </div>
 
-    <%= link_to "編集", edit_book_path(@book) %>
+    <% if admin_signed_in? %>
+        <%= link_to "編集", edit_book_path(@book) %>
+
+        <br>
+
+        <%= link_to '削除', destroy_book_path(@book), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+    <% else %>
+        <%= link_to '注文する', new_order_path(book_id: @book.id) %>
+
+    <% end %>
