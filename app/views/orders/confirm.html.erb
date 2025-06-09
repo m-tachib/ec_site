@@ -1,0 +1,37 @@
+<h1>注文確認</h1>
+
+<%= form_with(model: @order, url: orders_path(@order), data: { turbo: false }) do |form| %>
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@order.errors.count, "error") %> prohinited this article from being saved: </h2>
+
+            <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <h4>商品名</h4>
+    <%= @book.book_name %>
+    <%= form.hidden_field :book_id, value: @book.id %>
+
+    <h4>個数</h4>
+    <%= @order.quantity %>
+    <%= form.hidden_field :quantity, value: @order.quantity %>
+
+    <h4>合計金額</h4>
+    <%= @order.total %> 円
+    <%= form.hidden_field :total, value: @order.total %>
+
+    <h4>送り先</h4>
+    <%= @order.delivery_address %>
+    <%= form.hidden_field :delivery_address, value: @order.delivery_address %>
+
+
+
+    <div class="actions">
+        <%= form.submit '注文' %>
+    </div>
+<% end %>

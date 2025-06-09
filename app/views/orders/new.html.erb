@@ -7,7 +7,7 @@
 
             <ul>
                 <% @order.errors.each do |error| %>
-                    <li><%= error.full_message %>
+                    <li><%= error.full_message %></li>
                 <% end %>
             </ul>
         </div>
@@ -17,10 +17,12 @@
     <%= @book.book_name %>
 
     <h4>個数</h4>
-    <%= form.number_field :count %>
+    <%= form.number_field :quantity %>
 
     <h4>送り先</h4>
-    <%= form.text_field :address %>
+    <%= form.text_field :delivery_address %>
+
+    <%= form.hidden_field :book_id, value: @book.id %>
 
     <div class="actions">
         <%= form.submit '注文確認' %>
