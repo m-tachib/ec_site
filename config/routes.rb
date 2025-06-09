@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'line_items/create'
+  # カート関連
+  resources :carts, only:[:show, :destroy]  # カートの詳細表示とカートを空にする処理
+  #  リストアイテム関連
+  resources :line_items, only: [:create]  # 商品をカートに追加する処理
   # 注文入力・注文作成
   resources :orders, only: [:new, :create] do
     collection do

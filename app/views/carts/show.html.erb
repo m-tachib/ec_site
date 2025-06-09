@@ -1,0 +1,26 @@
+<h1>買い物かご</h1>
+
+<% @line_items.each do |line_item| %>
+    <% book = line_item.book %>
+    <div>
+        <%= book.book_name %>
+        <%= line_item.quantity %> 個
+        <%= line_item.price %><span>円</span>
+    </div>
+<% end %>
+
+<% if @line_items.count == 0 %>
+    買い物かごには何も入っていません
+<% else %>
+    <div>
+        <p>
+            合計注文数：<%= @current_cart.total_quantity %><span>個</span>
+        </p>
+        <p>
+            合計金額：<%= @current_cart.total_price %><span>円</span>
+        </p>
+    </div>
+
+    <%= link_to '注文する', new_order_path %> |
+    <%= link_to '買い物かごを空にする', @cart, data: { "turbo-method": :delete, "turbo-confirm": '買い物かごの中身をすべて削除してもいいですか？'} %>
+<% end %>

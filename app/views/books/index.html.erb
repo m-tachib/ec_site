@@ -4,8 +4,14 @@
     <%= link_to "新規登録", books_new_path %>
 <% end %>
 
+<% if session[:cart_id] %>
+    <br>
+    <%= link_to '買い物かごを見る', cart_path(session[:cart_id]) %>
+<% end %>
+
 <% @books.each do |book| %>
     <div>
+        <p><%= image_tag book.thumbnail %></p>       
         <p>書籍名: <%= book.book_name %></p>
         <p>著者名: <%= book.author_name %></p>
         <p>発行日: <%= book.issue_date %></p>

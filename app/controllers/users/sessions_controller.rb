@@ -4,19 +4,25 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    # 継承元のDeviseの処理をそのまま実行
+    super
+
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    # ログインが成功したら、継承元のDeviseのcreateを実行後、sessionに値を保存する
+    super
+    session[:user_id] = current_user.id
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    # ログアウトしたら、sessionの値を削除後、継承元のdeviseのdestroyを実行する
+    session.delete(:user_id)
+    super
+  end
 
   # protected
 

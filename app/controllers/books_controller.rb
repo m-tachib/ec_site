@@ -34,6 +34,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @line_item = LineItem.new  # 新しい買い物かご詳細を作成するためのからのインスタンス
   end
 
   def destroy
@@ -45,7 +46,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price)
+    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :photo)
   end
 
   def check_admin

@@ -1,6 +1,8 @@
 <h1>書籍新規登録</h1>
 
 <%= form_with model: @book do |f| %>
+    <div class="field">
+        <%= form.label :name, style: "display: block" %>
     <div>
         <%= f.label :book_name, "書籍名" %>
         <%= f.text_field :book_name %>

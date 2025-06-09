@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   # 注文画面
   def new
     @order = Order.new
-    @book = Book.find(params[:book])
+    @line_items = current_cart.line_items
   end
 
   # 注文内容の確認画面
