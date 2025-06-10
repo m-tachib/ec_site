@@ -5,8 +5,14 @@
             <p>書籍名: <%= @book.book_name %></p>
             <p>著者名: <%= @book.author_name %></p>
             <p>発行日: <%= @book.issue_date %></p>
-            <p>価格: <%= @book.price %></p>
-            <p>販売状況: <%= I18n.t("enums.book.status.#{@book.status}") %></p>
+            <p>価格: <%= @book.price %> 円</p> 
+            <p>商品ステータス: <%= I18n.t("enums.book.status.#{@book.status}") %></p>
+            <p>タグ: 
+                <% @book.tags.each do |tag| %>
+                    <%= tag.tag_name %><%= ',' unless tag == @book.tags.last %>
+                <% end %>
+            </p>
+
         <% end %>
     </div>
 
@@ -17,6 +23,12 @@
 
         <%= link_to '削除', destroy_book_path(@book), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
     <% elsif @book.status == 'on_sale' %>
-        <%= link_to '買い物かごに入れる', line_items_path(book_id: @book.id), data: { turbo_method: :post } %>
-
+        <%= form_with url: line_items_path, method: :post, local: true do |f| %>
+            <%= hidden_field_tag :book_id, @book.id %>
+            <div>
+                <%= f.label :quantity, "数量" %>
+                <%= f.number_field :quantity, value: 1, min: 1 %>
+            </div>
+            <%= f.submit '買い物かごに入れる' %>
+        <% end %>
     <% end %>

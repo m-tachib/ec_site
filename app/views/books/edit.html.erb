@@ -22,16 +22,27 @@
     </div>
 
     <div>
+        <%= f.label :product_display, "商品表示" %>
+        <%= f.check_box :product_display %>
+    </div>
+
+    <div>
         <%= f.label :price, "価格" %>
         <%= f.number_field :price %>
     </div>
 
     <div>
-        <%= f.label :status, "ステータス" %>
-        <% Book.statuses.keys.each do |status| %>
-            <%= f.radio_button :status, status %>
-            <%= f.label :status, I18n.t("enums.book.status.#{status}") %>
+        <label>タグ</label><br>
+        <% Tag.all.each do |tag| %>
+        <%= check_box_tag "book[tag_ids][]", tag.id, @book.tags.include?(tag), id: "tag_#{tag.id}" %>
+        <%= label_tag "tag_#{tag.id}", tag.tag_name %><br>
         <% end %>
+    <div>
+
+
+    <div>
+        <%= f.label :status, "ステータス" %>
+        <%= f.select :status, Book.statuses.keys.map { |status| [t("enums.book.status.#{status}"), status] } %>
     </div>
 
     <div>

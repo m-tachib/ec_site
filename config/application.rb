@@ -27,6 +27,6 @@ module EcSite
     # タイムゾーン指定
     config.time_zone = 'Tokyo'
     # 日本語化
-    config.i18n.default_locate = :ja
+    config.i18n.default_locale = :ja
   end
 end

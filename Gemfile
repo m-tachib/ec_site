@@ -75,5 +75,8 @@ gem "dotenv-rails", "~> 3.1"
 
 # Enum
 gem 'enum_help'
+gem 'rails-i18n'
+gem 'devise-i18n'
 
-
+# Ransack
+gem 'ransack'

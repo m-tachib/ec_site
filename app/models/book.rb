@@ -14,8 +14,14 @@ class Book < ApplicationRecord
     has_many :order_details  #商品は複数の注文と関連（1対多）
     has_many :orders, through: :order_details  #中間テーブルを通じて複数の注文と関連（多対多）
 
+    # 関連付け（タグ）
+    has_many :taggings
+    has_many :tags, through: :taggings
+
     # Active Storage（書籍画像）
     has_one_attached :photo
+
+     accepts_nested_attributes_for :tags
 
     # 書籍画像のサムネイルを作成
     def thumbnail
@@ -24,6 +30,11 @@ class Book < ApplicationRecord
             photo.attach(io: File.open(file_path), filename:'default-image.jpg', content_type: 'image/jpeg')
         end
         photo.variant(resize_to_limit: [150, 150]).processed
+    end
+
+    # 検索(Ransack)
+    def self.ransackable_attributes(auto_object = nil)
+        %w[book_name author_name issue_date price]
     end
 
 

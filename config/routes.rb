@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  delete 'tags/:id', to: 'tags#destroy', as: 'destroy_tag'
+  get 'tags', to: 'tags#index'
+  get 'tags/new'
+  post 'tags', to: 'tags#create'
   get 'line_items/create'
   # カート関連
   resources :carts, only:[:show, :destroy]  # カートの詳細表示とカートを空にする処理

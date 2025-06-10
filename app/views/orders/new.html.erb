@@ -1,4 +1,6 @@
-<h1>注文</h1>
+<h1>注文画面</h1>
+<h4>カートの内容</h4>
+
 
 <%= form_with(model: @order, local: true, url: confirm_orders_path, method: :get) do |form| %>
     <% if @order.errors.any? %>
@@ -13,15 +15,37 @@
         </div>
     <% end %>
 
-    <h4>商品名：個数</h4>
-    <% @line_items.each do |line_item| %>
-        <% if line_item.book.present? %>
-            <div>
-                <%= line_item.book.book_name %> :
-                <%= form.number_field "line_item_quantity_#{line_item.id}", value: line_item.quantity %>
-            </div>
+    <table>
+    <thead>
+        <tr>
+            <th>書籍名</th>
+            <th>数量</th>
+            <th>単価</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @line_items.each do |line_item| %>
+            <% if line_item.book.present? %>
+                <% book = line_item.book %>
+                <tr>
+                    <td>
+                        <%= line_item.book.book_name %>
+                    </td>
+                    <td>
+                        <%= form.number_field "line_item_quantity_#{line_item.id}", value: line_item.quantity %>
+                    </td>
+
+                    <td>
+                        <%= book.price %><span>円</span>
+                    </td>
+                </tr>
+            <% end %>
         <% end %>
-    <% end %>
+    </tbody>
+</table>
+
+
 
     <h4>送り先</h4>
     <%= form.text_field :delivery_address %>

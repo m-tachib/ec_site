@@ -1,0 +1,13 @@
+<h1>新規タグ</h1>
+
+<%= form_with model: @tag do |f| %>
+  <div>
+    <%= f.label :tag_name, "タグ名" %>
+    <%= f.text_field :tag_name %>
+  </div>
+  
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+<% end %>
+

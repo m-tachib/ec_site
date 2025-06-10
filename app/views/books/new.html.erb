@@ -27,9 +27,24 @@
         <%= f.date_field :issue_date %>
     </div>
     <div>
+        <%= f.label :product_display, "商品表示" %>
+        <%= f.check_box :product_display %>
+    </div>
+    <div>
         <%= f.label :price, "価格" %>
         <%= f.number_field :price %>
     </div>
+    <div>
+        <label>タグ</label><br>
+        <% Tag.all.each do |tag| %>
+        <%= check_box_tag "book[tag_ids][]", tag.id, @book.tags.include?(tag), id: "tag_#{tag.id}" %>
+        <%= label_tag "tag_#{tag.id}", tag.tag_name %><br>
+        <% end %>
+    <div>
+        <%= f.label :status, "ステータス" %>
+        <%= f.select :status, Book.statuses.keys.map { |status| [t("enums.book.status.#{status}"), status] } %>
+    </div>
+
     
     <div>
         <%= f.submit "登録" %>

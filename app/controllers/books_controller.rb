@@ -16,7 +16,14 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    if current_admin
+      # 検索オブジェクト作成
+      @q = Book.ransack params[:q]
+    else
+      @q = Book.where(product_display: true).ransack(params[:q])
+    end
+    # 検索条件に基づいた一覧取得
+    @books = @q.result
   end
 
   def edit
@@ -46,7 +53,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :photo, :status)
+    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :photo, :status, tag_ids:[])
   end
 
   def check_admin

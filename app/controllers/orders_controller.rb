@@ -103,7 +103,7 @@ class OrdersController < ApplicationController
     @order.order_details.build(
       book: line_item.book,
       count: line_item.quantity,
-      price: line_item.price * line_item.quantity
+      price: line_item.price
     )
   end
 end

@@ -13,17 +13,41 @@
         </div>
     <% end %>
 
-    <h4>商品名 : 個数 : 金額</h4>
-    <% @order_details.each do |detail| %>
-        <div>
-            <%= detail[:name] %> :
-            <%= detail[:count] %> 個 :
-            <%= detail[:price] %> 円
-        </div>
-    <% end %>
+    <table>
+    <thead>
+        <tr>
+            <th>書籍名</th>
+            <th>数量</th>
+            <th>単価</th>
+            <th>小計</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @order_details.each do |detail| %>
+            <tr>
+                <td>
+                    <%= detail[:name] %>
+                </td>
+                <td>
+                    <%= detail[:count] %> 冊
+                </td>
+                <td>
+                    <%= (detail[:price].to_i / detail[:count].to_i rescue 0) %><span>円</span>
+                </td>
+
+                <td>
+                    <%= detail[:price] %><span>円</span>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
 
     <h4>合計注文数</h4>
-    <%= @order.quantity %> 個
+    <%= @order.quantity %> 冊
     <%= form.hidden_field :quantity, value: @order.quantity %>
 
     <h4>合計金額</h4>

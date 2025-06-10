@@ -25,7 +25,16 @@
         </li>
       <% elsif admin_signed_in? %>
         <li>
+          <%= link_to "新規書籍", books_new_path %>
+        </li>
+        <li>
+          <%= link_to "新規タグ", tags_new_path %>
+        </li>
+        <li>
           <%= link_to "書籍一覧", books_path %>
+        </li>
+        <li>
+          <%= link_to "タグ一覧", tags_path %>
         </li>
         <li>
           <%= link_to "ログアウト", destroy_admin_session_path, data: { turbo_method: :delete } %>

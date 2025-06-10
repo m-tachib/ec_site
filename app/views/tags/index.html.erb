@@ -1,0 +1,10 @@
+<h1>タグ一覧</h1>
+
+<% @tags.each do |tag| %>
+  <div>
+    <p>タグ名 : <%= tag.tag_name %></p>
+  </div>
+  <div>
+    <%= button_to '削除', destroy_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  </div>
+<% end %>

@@ -1,24 +1,52 @@
 <h1>書籍一覧</h1>
 
-<% if admin_signed_in? %>
-    <%= link_to "新規登録", books_new_path %>
+
+<h2>検索欄</h2>
+<%= search_form_for @q do |f| %>
+    <p>商品名 : <%= f.text_field :book_name_cont %></p>
+    <p>著者名 : <%= f.text_field :author_name_cont %></p>
+    <p>出版日 : <%= f.date_field :issue_date_eq %></p>
+    <p>価格 : <%=f.number_field :price_gteq %>以上〜<%= f.number_field :price_lteq %>以下</p>
+    <%= f.submit %>
 <% end %>
+
+<hr>
 
 <% if session[:cart_id] %>
     <br>
     <%= link_to '買い物かごを見る', cart_path(session[:cart_id]) %>
 <% end %>
 
-<% @books.each do |book| %>
-    <div>
-        <p><%= image_tag book.thumbnail %></p>       
-        <p>書籍名: <%= book.book_name %></p>
-        <p>著者名: <%= book.author_name %></p>
-        <p>発行日: <%= book.issue_date %></p>
-        <p>価格: <%= book.price %></p>
-        <%= link_to "詳細", book_path(book.id) %>
-    </div>
+<table>
+    <thead>
+        <tr>
+            <th><%= sort_link(@q, :book_name, '書籍名') %></th>
+            <th><%= sort_link(@q, :author_name, '著者名') %></th>
+            <th><%= sort_link(@q, :issue_date, '発行日') %></th>
+            <th><%= sort_link(@q, :price, '価格') %></th>
+            <th>商品ステータス</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @books.each do |book| %></th>
+            <tr>
+                <td>
+                    <%= link_to book.book_name, book_path(book) %>
+                </td>
+                <td>
+                    <%= book.author_name %> 
+                </td>
+                <td>
+                    <%= book.issue_date %>
+                <td>
+                    <%= book.price %> 円
+                </td>
+                <td>
+                    <%= t("enums.book.status.#{book.status}")%>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
 
-    <hr>
-
-<% end %>
