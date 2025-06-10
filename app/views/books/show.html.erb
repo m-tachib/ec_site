@@ -6,6 +6,7 @@
             <p>著者名: <%= @book.author_name %></p>
             <p>発行日: <%= @book.issue_date %></p>
             <p>価格: <%= @book.price %></p>
+            <p>販売状況: <%= I18n.t("enums.book.status.#{@book.status}") %></p>
         <% end %>
     </div>
 
@@ -15,7 +16,7 @@
         <br>
 
         <%= link_to '削除', destroy_book_path(@book), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
-    <% else %>
+    <% elsif @book.status == 'on_sale' %>
         <%= link_to '買い物かごに入れる', line_items_path(book_id: @book.id), data: { turbo_method: :post } %>
 
     <% end %>

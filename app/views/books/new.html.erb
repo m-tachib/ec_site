@@ -1,8 +1,19 @@
 <h1>書籍新規登録</h1>
 
 <%= form_with model: @book do |f| %>
-    <div class="field">
-        <%= form.label :name, style: "display: block" %>
+    <% if @book.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@book.errors.count, "error") %> prohibit this product from being saved: </h2>
+
+            <ul>
+                <% @book.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+
     <div>
         <%= f.label :book_name, "書籍名" %>
         <%= f.text_field :book_name %>

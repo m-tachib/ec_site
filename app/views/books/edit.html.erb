@@ -27,6 +27,14 @@
     </div>
 
     <div>
+        <%= f.label :status, "ステータス" %>
+        <% Book.statuses.keys.each do |status| %>
+            <%= f.radio_button :status, status %>
+            <%= f.label :status, I18n.t("enums.book.status.#{status}") %>
+        <% end %>
+    </div>
+
+    <div>
         <%= f.submit "更新" %>
     </div>
 <% end %>

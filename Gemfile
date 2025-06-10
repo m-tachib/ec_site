@@ -73,3 +73,7 @@ gem "devise"
 
 gem "dotenv-rails", "~> 3.1"
 
+# Enum
+gem 'enum_help'
+
+

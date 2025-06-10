@@ -2,11 +2,17 @@
 
 <h3>ご注文が完了しました。</h3>
 
-<h4>商品名</h4>
-<%= @book.book_name %>
+<h4> 商品名 : 個数 : 金額</h4>
+<% @order_details.each do |detail| %>
+    <div>
+        <%= detail[:name] %> :
+        <%= detail[:count] %> 個 :
+        <%= detail[:price] %> 円 
+    </div>
+<% end %>
 
-<h4>個数</h4>
+<h4>合計注文数</h4>
 <%= @order.quantity %> 個
 
-<h4>金額</h4>
+<h4>合計金額</h4>
 <%= @order.total %> 円

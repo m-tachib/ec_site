@@ -13,16 +13,19 @@
         </div>
     <% end %>
 
-    <h4>商品名</h4>
-    <%= @book.book_name %>
-
-    <h4>個数</h4>
-    <%= form.number_field :quantity %>
+    <h4>商品名：個数</h4>
+    <% @line_items.each do |line_item| %>
+        <% if line_item.book.present? %>
+            <div>
+                <%= line_item.book.book_name %> :
+                <%= form.number_field "line_item_quantity_#{line_item.id}", value: line_item.quantity %>
+            </div>
+        <% end %>
+    <% end %>
 
     <h4>送り先</h4>
     <%= form.text_field :delivery_address %>
 
-    <%= form.hidden_field :book_id, value: @book.id %>
 
     <div class="actions">
         <%= form.submit '注文確認' %>

@@ -23,5 +23,10 @@ module EcSite
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # タイムゾーン指定
+    config.time_zone = 'Tokyo'
+    # 日本語化
+    config.i18n.default_locate = :ja
   end
 end

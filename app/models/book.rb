@@ -3,6 +3,9 @@ class Book < ApplicationRecord
     validates :author_name, presence: true
     validates :price, presence: true
 
+    # Enum （販売状況）
+    enum status: { on_sale: 0, sold_out: 1 }
+
     # 関連付け（カート）
     has_many :line_items, dependent: :destroy  #商品は複数のカートアイテムと関連（1対多）
     has_many :carts, through: :line_items  #中間テーブルを通じて複数のカートと関連（多対多）
